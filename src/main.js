@@ -6,19 +6,34 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 Vue.use(VueAxios, axios);
 
+axios.defaults.withCredentials = true;
+
+
 new Vue({
-  created(){
-    const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products`;
-    console.log(process.env.VUE_APP_APIPATH, process.env.VUE_APP_CUSTOMPATH);
-    this.$http.get(api).then((response) => {
-      console.log(response.data)
-    })
-  },
   router,
   store,
   render: h => h(App)
 })
 .$mount('#app')
+
+
+router.beforeEach((to, from, next) => {
+  console.log('to', to, 'from', from, 'next', next);
+  if(to.meta.requiresAuth){
+    const api = `${process.env.VUE_APP_APIPATH}/api/user/check`;
+    const vm = this;
+    axios.post(api).then((response) => {
+      console.log(response.data);
+      if(response.data.success){
+        next();
+      }
+    })
+  }else{
+    next({
+      path: '/login',
+    });
+  }
+})

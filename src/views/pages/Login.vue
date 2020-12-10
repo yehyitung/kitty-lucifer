@@ -20,18 +20,18 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'Login',
   data(){
     return{
       user:{
-        username:'',
-        password:'',
+        username:"",
+        password:"",
       }
     }
   },
   methods:{
     signin(){
-      const api = `${process.env.VUE_APP_APIPATH}/signin`;
+      const api = `${process.env.VUE_APP_APIPATH}/admin/signin`;
       const vm = this;
       this.$http.post(api.vm.user).then((response) => {
         console.log(response.data);
