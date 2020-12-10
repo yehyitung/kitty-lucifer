@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="login">
     <form class="form-signin" @submit.prevent="signin">
       <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
       <label for="inputEmail" class="visually-hidden">Email address</label>
@@ -14,7 +14,6 @@
       <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
       <p class="mt-5 mb-3 text-muted">&copy; 2017-2020</p>
     </form>
-
   </div>
 </template>
 
@@ -24,8 +23,8 @@ export default {
   data(){
     return{
       user:{
-        username:"",
-        password:"",
+        username:'',
+        password:'',
       }
     }
   },
@@ -33,7 +32,7 @@ export default {
     signin(){
       const api = `${process.env.VUE_APP_APIPATH}/admin/signin`;
       const vm = this;
-      this.$http.post(api.vm.user).then((response) => {
+      this.$http.post(api,vm.user).then((response) => {
         console.log(response.data);
         if(response.data.success){
           vm.$router.push('/');

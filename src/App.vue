@@ -4,6 +4,6 @@
   </div>
 </template>
 
-<style lang="scss" lang="scss">
+<style lang="scss">
 @import "./assets/all";
 </style>
