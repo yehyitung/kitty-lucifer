@@ -13,7 +13,7 @@
           <th width="100">原價</th>
           <th width="100">售價</th>
           <th width="120">是否啟用</th>
-          <th width="100">編輯</th>
+          <th width="120">編輯</th>
         </tr>
       </thead>
       <tbody>
@@ -31,7 +31,10 @@
             <span v-else>未啟用</span>
           </td>
           <td>
-            <button class="btn btn-outline-primary btn-sm" @click="openModal(false, item)">編輯</button>
+            <div class="btn-group">
+              <button class="btn btn-outline-info btn-sm" @click="openModal(false, item)">編輯</button>
+              <button class="btn btn-outline-danger btn-sm" @click="openDelModal(item)">刪除</button>
+            </div>
           </td>
         </tr>
       </tbody>
@@ -144,7 +147,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">取消</button>
-            <button type="button" class="btn btn-danger"
+            <button type="button" class="btn btn-danger" @click="deleteProduct()"
               >確認刪除</button>
           </div>
         </div>
@@ -182,7 +185,7 @@ export default {
         this.tempProduct = {};
         this.isNew = true;
       }else{
-        this.tempProduct = Object.assign({}, item);
+        this.tempProduct = { ...item };
         this.isNew = false;
       }
       $('#productModal').modal('show');
@@ -196,16 +199,36 @@ export default {
         httpMethod = 'put'
       }
       this.$http[httpMethod](api, { data: vm.tempProduct }).then((response) => {
-        console.log(response.data);
         if(response.data.success){
           $('#productModal').modal('hide');
           vm.getProducts();
         }else{
           $('#productModal').modal('hide');
+          vm.$bus.$emit("message:push", response.data.message, "danger");
           vm.getProducts();
           console.log('新增失敗')
         }
         // vm.products = response.data.products;
+      });
+    },
+    openDelModal(item) {
+      // 開啟刪除的 modal
+      this.tempProduct = { ...item };
+      $("#delProductModal").modal("show");
+    },
+    deleteProduct() {
+      // 刪除產品
+      const vm = this;
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product/${vm.tempProduct.id}`;
+      this.$http.delete(api).then((res) => {
+        if (res.data.success) {
+          $("#delProductModal").modal("hide");
+          vm.getProducts();
+        } else {
+          $("#delProductModal").modal("hide");
+          vm.$bus.$emit("message:push", res.data.message, "danger");
+          vm.getProducts();
+        }
       });
     },
   },
