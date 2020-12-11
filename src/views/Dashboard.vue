@@ -1,6 +1,7 @@
 <template>
   <div>
     <Navbar/>
+    <Alert></Alert>
     <div class="container-fluid">
       <div class="row">
         <Sidebar/>
@@ -16,12 +17,14 @@
 <script>
 import Navbar from '@/components/Navbar.vue'
 import Sidebar from '@/components/Sidebar.vue'
+import Alert from '@/components/AlertMessage.vue'
 
 export default {
   name: 'Dashboard',
   components: {
     Navbar,
     Sidebar,
+    Alert,
   }
 }
 </script>
