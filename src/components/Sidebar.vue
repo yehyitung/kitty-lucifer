@@ -22,7 +22,7 @@
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/admin/cupon" class="nav-link">
+            <router-link to="/admin/cupons" class="nav-link">
                <i class="fas fa-ticket-alt"></i>
               優惠卷
             </router-link>

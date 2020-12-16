@@ -1,10 +1,17 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 // import Home from '../views/Home.vue'
+
+//前台頁面
+import CustomerOrder from '../views/pages/CustomerOrder.vue'
 import Login from '../views/pages/Login.vue'
+
+//後台頁面
 import Dashboard from '../views/Dashboard.vue'
 import Products from '../views/pages/Products.vue'
-import CustomerOrder from '../views/pages/CustomerOrder.vue'
+import Orders from '../views/pages/Orders.vue'
+import Cupons from '../views/pages/Cupons.vue'
+
 
 Vue.use(VueRouter)
 
@@ -35,11 +42,23 @@ const routes = [
         component: Products,
         meta: { requiresAuth: true },
       },
+      {
+        path: 'orders',
+        name: 'Orders',
+        component: Orders,
+        meta: { requiresAuth: true },
+      },
+      {
+        path: 'cupons',
+        name: 'Cupons',
+        component: Cupons,
+        meta: { requiresAuth: true },
+      },
     ]
   },
   {
     path: '/',
-    name: 'Dashboard',
+    name: 'Home',
     component: Dashboard,
     children: [
       {
