@@ -10,7 +10,7 @@ import Login from '../views/pages/Login.vue'
 import Dashboard from '../views/Dashboard.vue'
 import Products from '../views/pages/Products.vue'
 import Orders from '../views/pages/Orders.vue'
-import Cupons from '../views/pages/Cupons.vue'
+import Coupons from '../views/pages/Coupons.vue'
 
 
 Vue.use(VueRouter)
@@ -49,9 +49,9 @@ const routes = [
         meta: { requiresAuth: true },
       },
       {
-        path: 'cupons',
-        name: 'Cupons',
-        component: Cupons,
+        path: 'coupons',
+        name: 'Coupons',
+        component: Coupons,
         meta: { requiresAuth: true },
       },
     ]
