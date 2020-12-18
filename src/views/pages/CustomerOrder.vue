@@ -271,10 +271,13 @@ export default {
       const order = vm.form;
       vm.isLoading = true;
       this.$http.post(api, { data: order }).then((response) => {
-        console.log('訂單已完成' ,response);
+        console.log('訂單已建立' ,response);
+        if(response.data.success){
+          vm.$router.push(`customer-checkout/${response.data.orderId}`)
+        }
         // vm.getCart();
         vm.isLoading = false;
-      })
+      });
     }
   },
   created() {

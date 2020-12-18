@@ -5,6 +5,7 @@ import VueRouter from 'vue-router'
 //前台頁面
 import CustomerOrder from '../views/pages/CustomerOrder.vue'
 import Login from '../views/pages/Login.vue'
+import CustomerCheckout from '../views/pages/CustomerCheckout.vue'
 
 //後台頁面
 import Dashboard from '../views/Dashboard.vue'
@@ -65,6 +66,11 @@ const routes = [
         path: 'customer-order',
         name: 'CustomerOrder',
         component: CustomerOrder,
+      },
+      {
+        path: 'customer-checkout/:orderId',
+        name: 'CustomerCheckout',
+        component: CustomerCheckout,
       },
     ]
   },
