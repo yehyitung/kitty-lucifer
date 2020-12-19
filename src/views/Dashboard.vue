@@ -15,9 +15,9 @@
 
 
 <script>
-import Navbar from '@/components/Navbar.vue'
-import Sidebar from '@/components/Sidebar.vue'
-import Alert from '@/components/AlertMessage.vue'
+import Navbar from '@/components/backstage/Navbar.vue'
+import Sidebar from '@/components/backstage/Sidebar.vue'
+import Alert from '@/components/backstage/AlertMessage.vue'
 
 export default {
   name: 'Dashboard',

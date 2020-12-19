@@ -1,17 +1,22 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-// import Home from '../views/Home.vue'
 
 //前台頁面
-import CustomerOrder from '../views/pages/CustomerOrder.vue'
-import Login from '../views/pages/Login.vue'
-import CustomerCheckout from '../views/pages/CustomerCheckout.vue'
+import Index from '../views/Index.vue'
+import Home from '../views/forestage/Home.vue'
+import About from '../views/forestage/About.vue'
+import AllProducts from '../views/forestage/AllProducts.vue'
+import Contact from '../views/forestage/Contact.vue'
+
+import CustomerOrder from '../views/backstage/CustomerOrder.vue'
+import CustomerCheckout from '../views/backstage/CustomerCheckout.vue'
 
 //後台頁面
+import Login from '../views/Login.vue'
 import Dashboard from '../views/Dashboard.vue'
-import Products from '../views/pages/Products.vue'
-import Orders from '../views/pages/Orders.vue'
-import Coupons from '../views/pages/Coupons.vue'
+import Products from '../views/backstage/Products.vue'
+import Orders from '../views/backstage/Orders.vue'
+import Coupons from '../views/backstage/Coupons.vue'
 
 
 Vue.use(VueRouter)
@@ -19,19 +24,43 @@ Vue.use(VueRouter)
 const routes = [
   {
     path:'*',
-    redirect:'login',
+    redirect:'/',
   },
-  // {
-  //   path: '/',
-  //   name: 'Home',
-  //   component: Home,
-  //   meta: { requiresAuth: true },
-  // },
+  //前台
+  {
+    path: '/',
+    name: 'Index',
+    component: Index,
+    children:[
+      {
+        path: '/',
+        name: 'Home',
+        component: Home,
+      },
+      {
+        path: 'about',
+        name: 'About',
+        component: About,
+      },
+      {
+        path: 'all-products',
+        name: 'AllProducts',
+        component: AllProducts,
+      },
+      {
+        path: 'contact',
+        name: 'Contact',
+        component: Contact,
+      },
+    ]
+  },
+  //後台登入頁
   {
     path: '/login',
     name: 'Login',
     component: Login,
   },
+  //後台
   {
     path: '/admin',
     name: 'Dashboard',
@@ -59,7 +88,7 @@ const routes = [
   },
   {
     path: '/',
-    name: 'Home',
+    name: 'Dashboard',
     component: Dashboard,
     children: [
       {

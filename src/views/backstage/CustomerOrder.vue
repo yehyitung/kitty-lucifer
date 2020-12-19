@@ -55,7 +55,7 @@
             </div>
             <select name="" class="form-control mt-3" v-model="product.num">
               <option :value="num" v-for="num in 10" :key="num">
-                選購 {{ num }} {{ product.unit }} 件
+                選購 {{ num }} {{ product.unit }} 
               </option>
             </select>
           </div>

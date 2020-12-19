@@ -11,6 +11,8 @@ import * as rules from 'vee-validate/dist/rules';
 import App from './App.vue' 
 import router from './router'
 import store from './store'
+import "@/assets/all.scss";
+
 import './bus'
 import currencyFilter from './filters/currency'
 
