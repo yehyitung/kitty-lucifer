@@ -6,6 +6,7 @@ import Index from '../views/Index.vue'
 import Home from '../views/forestage/Home.vue'
 import About from '../views/forestage/About.vue'
 import AllProducts from '../views/forestage/AllProducts.vue'
+import ProductContent from '../views/forestage/ProductContent.vue'
 import Contact from '../views/forestage/Contact.vue'
 
 import CustomerOrder from '../views/backstage/CustomerOrder.vue'
@@ -46,6 +47,11 @@ const routes = [
         path: 'all-products',
         name: 'AllProducts',
         component: AllProducts,
+      },
+      {
+        path: 'all-products/:productId',
+        name: 'ProductContent',
+        component: ProductContent,
       },
       {
         path: 'contact',

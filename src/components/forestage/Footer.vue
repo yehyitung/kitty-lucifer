@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-light">
+  <div class="bg-light position-b">
     <footer class="container py-5">
       <div class="row">
         <div class="col-sm-6 col-md-8">
@@ -27,3 +27,10 @@
     </footer>
   </div>
 </template>
+
+<style lang="scss">
+  .position-b{
+    position: relative;
+    bottom: 0;
+  }
+</style>

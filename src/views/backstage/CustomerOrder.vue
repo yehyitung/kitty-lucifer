@@ -197,7 +197,7 @@ export default {
       const vm = this;
       vm.isLoading = true;
       this.$http.get(api).then((response) => {
-        console.log(response.data, 'success');
+        // console.log(response.data, 'success');
         vm.products = response.data.products;
         // vm.pagination = response.data.pagination;
         vm.isLoading = false;
