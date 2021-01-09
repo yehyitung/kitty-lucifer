@@ -1,6 +1,5 @@
 <template>
   <div>
-    <loading :active.sync="isLoading"></loading>
     <div class="text-right mt-4">
       <button class="btn btn-primary" @click="openModal(true)">
         建立新產品
@@ -174,7 +173,6 @@ export default {
       pagination:{},
       tempProduct: {},
       isNew: false,
-      isLoading: false,
       status: {
         fileUploading: false,
       }
@@ -187,10 +185,10 @@ export default {
     getProducts(page =1){
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/products?page=${page}`
       const vm = this;
-      vm.isLoading = true;
+      vm.$store.state.isLoading = true;
       this.$http.get(api).then((response) => {
         console.log(response.data);
-        vm.isLoading = false;
+        vm.$store.state.isLoading = false;
         vm.products = response.data.products;
         vm.pagination = response.data.pagination;
       });

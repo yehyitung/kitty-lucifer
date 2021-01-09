@@ -1,12 +1,15 @@
 import Vue from 'vue'
+import Vuex from 'vuex'
 import VueAxios from 'vue-axios'
 import axios from 'axios'
+import VueCarousel from 'vue-carousel';
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 import 'bootstrap'
 import { ValidationObserver, ValidationProvider, extend, localize, configure } from 'vee-validate';
 import TW from 'vee-validate/dist/locale/zh_TW.json'
 import * as rules from 'vee-validate/dist/rules';
+
 
 import App from './App.vue' 
 import router from './router'
@@ -18,7 +21,8 @@ import currencyFilter from './filters/currency'
 
 Vue.config.productionTip = false;
 Vue.use(VueAxios, axios);
-
+Vue.use(Vuex);
+Vue.use(VueCarousel);
 
 Vue.component('Loading', Loading);
 Vue.filter('currency',currencyFilter)

@@ -3,7 +3,7 @@
     <Navbar/>
     <div class="container-fluid">
       <div class="row">
-          <main class="col-lg-10 p-0">
+          <main class="col-lg-12 p-0">
               <router-view/>
           </main>
       </div>

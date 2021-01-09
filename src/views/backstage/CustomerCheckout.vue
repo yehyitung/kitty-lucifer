@@ -70,23 +70,23 @@ export default {
     getOrder(){
       const vm = this;
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order/${vm.orderId}`;
-      vm.isLoading = true;
+      vm.$store.state.isLoading = true;
       this.$http.get(api).then((response) => {
         vm.order = response.data.order;
         console.log(response);
-        vm.isLoading = false;
+        vm.$store.state.isLoading = false;
       })
     },
     payOrder(){
       const vm = this;
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/pay/${vm.orderId}`;
-      vm.isLoading = true;
+      vm.$store.state.isLoading = true;
       this.$http.post(api).then((response) => {
         console.log(response);
         if(response.data.success){
           vm.getOrder()
         }
-        vm.isLoading = false;
+        vm.$store.state.isLoading = false;
       })
     }
   },

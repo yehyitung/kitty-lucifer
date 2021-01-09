@@ -1,57 +1,35 @@
 <template>
   <div>
-    <loading :active.sync="isLoading"></loading>
     <div class="container main-contant mb-5 mt-5">
       <div class="row">
         <div class="col-md-3">
           <!-- 左側選單 (List group) -->
-          <div
-            class="list-group text-center h5 custom-list-group"
-            id="myList"
-            role="tablist"
-          >
-            <li class="list-group-item bg-accent text-light">商品類別</li>
-            <a
-              class="list-group-item list-group-item-action"
-              href="#"
-              @click.prevent="getText('')"
-              :class="{ active: searchText === '' }"
-              >所有商品</a
-            >
-            <a
-              class="list-group-item list-group-item-action"
-              href="#"
+          <div class="list-group text-center h5 custom-list-group">
+            <!-- <li class="list-group-item bg-accent text-light">商品類別</li> -->
+            <a class="list-group-item list-group-item-action" href="#"
+              @click.prevent=" searchText = '' "
+              :class="{ 'active': searchText === '' }">
+              所有商品
+            </a>
+            <a class="list-group-item list-group-item-action" href="#"
               v-for="item in categories"
               :key="item"
-              :class="{ active: item === searchText }"
-              @click.prevent="getText(item)"
-              >{{ item }}</a
-            >
+              :class="{ 'active': item === searchText }"
+              @click.prevent="searchText = item">
+              {{ item }}
+            </a>
           </div>
-
-            <!-- <div class="list-group">
-              <a class="list-group-item list-group-item-action active" data-toggle="list" href="#list-gold">
-                <i class="fa fa-suitcase" aria-hidden="true"></i> 全部商品</a>
-              <a class="list-group-item list-group-item-action" data-toggle="list" href="#list-gift">
-                <i class="fa fa-gift" aria-hidden="true"></i> 用品區</a>
-              <a href="#" class="list-group-item list-group-item-action disabled">
-                <i class="fa fa-film" aria-hidden="true"></i> 衣物區</a>
-              <a href="#" class="list-group-item list-group-item-action disabled">
-                <i class="fa fa-paw" aria-hidden="true"></i> 包包區</a>
-              <a href="#" class="list-group-item list-group-item-action disabled">
-                <i class="fa fa-tree" aria-hidden="true"></i> 其他類別</a>
-            </div> -->
         </div>
         <div class="col-md-9">
           <!-- 主要商品列表 (Card) -->
           <div class="tab-content">
-            <div class="tab-pane active" id="list-gold">
+            <div class="tab-pane active" id="all-product" role="tabpanel">
               <div class="row">
-                <div class="col-md-4 mb-4" v-for="item in products" :key="item.id">
-                  <router-link class="card border-0 shadow-sm text-decoration" :to="`/all-products/${item.id}`">
+                <div class="col-md-4 mb-4" v-for="item in filterData" :key="item.id">
+                  <div class="card border-0 shadow-sm">
                     <div style="height: 150px; background-size: cover; background-position:center" :style="{backgroundImage:`url(${item.imageUrl})`}">
                     </div>
-                    <div class="card-body">
+                    <router-link class="card-body text-decoration" :to="`/all-products/${item.id}`">
                       <span class="badge badge-secondary float-right ml-2">{{ item.category }}</span>
                       <h5 class="card-title">
                         <a href="#" class="text-dark">{{ item.title }}</a>
@@ -62,7 +40,7 @@
                         <del class="h6" v-if="item.price">原價 {{ item.origin_price}} 元</del>
                         <div class="h5" v-if="item.price">現在只要 {{ item.price }} 元</div>
                       </div>
-                    </div>
+                    </router-link>
                     <div class="card-footer d-flex">
                       <button type="button" class="btn btn-outline-secondary btn-sm"  @click="openSingleProduct(item.id)">
                         <i class="fas fa-spinner fa-spin" v-if="status.loadingItem === item.id"></i>
@@ -72,26 +50,6 @@
                         <i class="fas fa-spinner fa-spin" v-if="status.loadingItem === item.id"></i>
                         加到購物車
                       </button>
-                    </div>
-                  </router-link>
-                </div>
-              </div>
-            </div>
-            <div class="tab-pane" id="list-gift">
-              <div class="row align-items-stretch">
-                <!-- 禮品 -->
-                <div class="col-md-4 mb-4">
-                  <div class="card border-0 box-shadow text-center h-100">
-                    <img class="card-img-top" src="https://images.unsplash.com/photo-1482173074468-5b323335debe?w=1350" alt="Card image cap">
-                    <div class="card-body">
-                      <h4 class="card-title">超精緻禮物</h4>
-                      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content
-                        is a little bit longer.</p>
-                    </div>
-                    <div class="card-footer border-top-0 bg-white">
-                      <a href="#" class="btn btn-outline-secondary btn-block btn-sm">
-                        <i class="fa fa-cart-plus" aria-hidden="true"></i> 搶購去
-                      </a>
                     </div>
                   </div>
                 </div>
@@ -112,50 +70,72 @@ export default {
   data(){
     return{
       products:[],
-      product:[],
+      searchText: '',
+      categories: [],
       status:{
         loadingItem: ''
       },
-      cart:{},
-      isLoading: false,
     };
   },
   components: {
-
+    
+  },
+  computed: {
+    filterData() {
+      const vm = this;
+      if (vm.searchText) {
+        return vm.products.filter(item => {
+          const data = item.category.toLowerCase().includes(vm.searchText.toLowerCase());
+          return data;
+          console.log(data);
+        });
+      }
+      return this.products;
+    },
   },
   methods: {
     getProducts() {
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
       const vm = this;
-      vm.isLoading = true;
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
+      vm.$store.state.isLoading = true;
       this.$http.get(api).then((response) => {
-        // console.log(response.data, 'success');
+        console.log(response.data, 'success');
         vm.products = response.data.products;
-        // vm.pagination = response.data.pagination;
-        vm.isLoading = false;
+        vm.getUnique();
+        vm.$store.state.isLoading = false;
       })
     },
     addtoCart(id, qty = 1){
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
       const vm = this;
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
       vm.status.loadingItem = id;
-      const cart = {
+      const item = {
         product_id:id,
         qty
-      }
-      this.$http.post(api, { data: cart }).then((response) => {
-        
+      };
+      vm.$store.state.isLoading = true;
+      this.$http.post(api, { data: item }).then((response) => {
+        vm.$store.state.isLoading = false;
         console.log(response);
-        // vm.pagination = response.data.pagination;
-         vm.status.loadingItem = '';
-         vm.getCart();
-         $('#productModal').modal('hide');
+        vm.status.loadingItem = '';
+        // vm.getCart();
+        // $('#productModal').modal('hide');
       })
+    },
+    getUnique() {
+      const vm = this;
+      const categories = new Set();
+      vm.products.forEach((item) => {
+        categories.add(item.category);
+      });
+      vm.categories = Array.from(categories);
+      console.log(categories);
     },
     openSingleProduct(id) {
       console.log('enter');
       this.$router.push(`/all-products/${id}`);
     },
+    
   },
   created() {
     this.getProducts();

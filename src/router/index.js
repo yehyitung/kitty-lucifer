@@ -7,6 +7,7 @@ import Home from '../views/forestage/Home.vue'
 import About from '../views/forestage/About.vue'
 import AllProducts from '../views/forestage/AllProducts.vue'
 import ProductContent from '../views/forestage/ProductContent.vue'
+import Cart from '../views/forestage/Cart.vue'
 import Contact from '../views/forestage/Contact.vue'
 
 import CustomerOrder from '../views/backstage/CustomerOrder.vue'

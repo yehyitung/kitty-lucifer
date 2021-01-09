@@ -1,16 +1,17 @@
 <template>
   <div>
-    <loading :active.sync="isLoading"></loading>
     <div class="container main-contant mb-5 mt-5">
       <nav aria-label="breadcrumb" role="navigation">
         <ol class="breadcrumb bg-transparent pl-0">
           <li class="breadcrumb-item">
-            <a href="#">首頁</a>
+            <router-link to="/" class="text-primary-light">首頁</router-link>
           </li>
           <li class="breadcrumb-item">
-            <a href="#">金牌專賣店</a>
+            <router-link to="/all-products" class="text-primary-light">
+              全部產品
+            </router-link>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">金牌西裝</li>
+          <li class="breadcrumb-item active" aria-current="page">{{ productContent.title }}</li>
         </ol>
       </nav>
       <div class="row">
@@ -100,12 +101,12 @@ export default {
     getProductContent(){
       const vm = this;
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${vm.id}`;
-      vm.isLoading = true;
+      vm.$store.state.isLoading = true;
       this.$http.get(api).then((response) => {
         console.log(response.data, 'success');
         vm.productContent = response.data.product;
         vm.productContent.num = 1;
-        vm.isLoading = false;
+        vm.$store.state.isLoading = false;
       })
       
     }

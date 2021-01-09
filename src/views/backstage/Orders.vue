@@ -1,6 +1,5 @@
 <template>
   <div>
-    <loading :active.sync="isLoading"></loading>
     <table class="table mt-5">
         <thead>
             <tr>
@@ -43,7 +42,6 @@ export default {
   data() {
     return {
         orders: [], //存取訂單資料
-        isLoading: false, //網頁loading效果
         pagination: {}
     }
   },
@@ -51,9 +49,9 @@ export default {
     getOrders(page = 1) {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/orders?page=${page}`
       const vm = this;
-      vm.isLoading = true;
+      vm.$store.state.isLoading = true;
       vm.$http.get(api).then((response) => {
-        vm.isLoading = false;
+        vm.$store.state.isLoading = false;
         console.log(response.data);
         vm.orders = response.data.orders;
         vm.pagination = response.data.pagination;

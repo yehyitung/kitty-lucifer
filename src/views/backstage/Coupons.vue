@@ -1,6 +1,5 @@
 <template>
   <div>
-    <loading :active.sync="isLoading"></loading>
     <div class="text-right mt-4">
       <button class="btn btn-primary" @click="openModal(true)">
           建立優惠卷</button>
@@ -112,7 +111,6 @@ export default {
         return {
             coupons: [],
             tempCoupon: {},
-            isLoading: false,
             isNew: true,
             pagination: {},
             delCoupon: false
@@ -122,9 +120,9 @@ export default {
         getCoupon(page = 1) {
           const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupons?page=${page}`
           const vm = this;
-          vm.isLoading = true;
+          vm.$store.state.isLoading = true;
           this.$http.get(api).then((response) => {
-              vm.isLoading = false;
+              vm.$store.state.isLoading = false;
               console.log(response.data);
               vm.coupons = response.data.coupons;
               vm.pagination = response.data.pagination;
@@ -157,7 +155,7 @@ export default {
           let api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon`;
           let httpMethod = 'post';
           const vm = this;
-          vm.isLoading = true;
+          vm.$store.state.isLoading = true;
           vm.tempCoupon.due_date = Math.floor(new Date(vm.tempCoupon.due_date) / 1000);
           if (!vm.isNew) {
               api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon/${vm.tempCoupon.id}`;
@@ -166,7 +164,7 @@ export default {
           this.$http[httpMethod](api, {
               data: vm.tempCoupon
           }).then((response) => {
-              vm.isLoading = false;
+              vm.$store.state.isLoading = false;
               console.log(response.data);
               vm.getCoupon();
               $('#couponModal').modal('hide');
