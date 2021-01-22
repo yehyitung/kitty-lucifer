@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import VueAxios from 'vue-axios'
 import axios from 'axios'
-import VueCarousel from 'vue-carousel';
+import carousel from 'vue-owl-carousel'
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 import 'bootstrap'
@@ -22,7 +22,7 @@ import currencyFilter from './filters/currency'
 Vue.config.productionTip = false;
 Vue.use(VueAxios, axios);
 Vue.use(Vuex);
-Vue.use(VueCarousel);
+Vue.use(carousel);
 
 Vue.component('Loading', Loading);
 Vue.filter('currency',currencyFilter)

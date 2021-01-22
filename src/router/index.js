@@ -59,6 +59,11 @@ const routes = [
         name: 'Contact',
         component: Contact,
       },
+      {
+        path: 'cart',
+        name: 'Cart',
+        component: Cart,
+      },
     ]
   },
   //後台登入頁

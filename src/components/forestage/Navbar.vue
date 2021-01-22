@@ -61,9 +61,9 @@
                     </tr>
                   </tbody>
                 </table>
-                <button class="btn btn-primary btn-block">
+                <router-link to="/cart" class="btn btn-primary btn-block">
                   <i class="fa fa-cart-plus" aria-hidden="true"></i> 結帳去
-                </button>
+                </router-link>
               </div>
             </li>
             <li class="nav-item mr-2">
