@@ -95,7 +95,7 @@
                   <button class="btn btn-primary btn-lg" @click="getCart">更新購物車列表</button>
                 </div>
                 <div class="col-md-6">
-                  <router-link type="button" class="btn btn-outline-primary btn-lg" to="/shop">繼續購物</router-link>
+                  <router-link type="button" class="btn btn-outline-primary btn-lg" to="/all-products">繼續購物</router-link>
                 </div>
               </div>
             </div>

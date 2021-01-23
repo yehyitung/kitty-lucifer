@@ -8,6 +8,8 @@ import About from '../views/forestage/About.vue'
 import AllProducts from '../views/forestage/AllProducts.vue'
 import ProductContent from '../views/forestage/ProductContent.vue'
 import Cart from '../views/forestage/Cart.vue'
+import Checkout from '../views/forestage/Checkout.vue'
+import Payment from '../views/forestage/Payment.vue'
 import Contact from '../views/forestage/Contact.vue'
 
 import CustomerOrder from '../views/backstage/CustomerOrder.vue'
@@ -63,6 +65,16 @@ const routes = [
         path: 'cart',
         name: 'Cart',
         component: Cart,
+      },
+      {
+        path: 'checkout',
+        name: 'Checkout',
+        component: Checkout,
+      },
+      {
+        path: 'payment/:orderId',
+        name: 'Payment',
+        component: Payment,
       },
     ]
   },
