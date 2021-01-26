@@ -13,8 +13,7 @@
               <div class="image">
                 <img src="../../assets/image/product-category-bag.jpg" alt="" class="img-fluid">
               </div>
-              <div class="text">
-                <span class="text-uppercase">商品分類</span>
+              <div class="text pt-4 text-center">
                 <h3>包包</h3>
               </div>
             </a>
@@ -24,8 +23,7 @@
               <div class="image">
                 <img src="../../assets/image/product-category-cup.jpg" alt="" class="img-fluid">
               </div>
-              <div class="text">
-                <span class="text-uppercase">商品分類</span>
+              <div class="text pt-4 text-center">
                 <h3>用品</h3>
               </div>
             </a>
@@ -35,8 +33,7 @@
               <div class="image">
                 <img src="../../assets/image/product-category-cloth.jpg" alt="" class="img-fluid">
               </div>
-              <div class="text">
-                <span class="text-uppercase">商品分類</span>
+              <div class="text pt-4 text-center">
                 <h3>衣服</h3>
               </div>
             </a>

@@ -8,7 +8,7 @@
             <div class="intro-text text-center text-md-left">
               <h4 class="mb-5">找到屬於你的禮物</h4>
               <p>
-                <router-link to="/all-products" href="#" class="btn btn-m btn-primary">立即購買</router-link>
+                <router-link to="/all-products" href="#" class="btn btn-lg btn-primary">立即購買</router-link>
               </p>
             </div>
           </div>
@@ -30,7 +30,7 @@
             <h2><a href="#">送禮最佳首選</a></h2>
             <p>還在煩惱要送什麼東西給親朋好友嗎?我們有禮盒讓你選擇喔!</p>
             <p>
-              <a href="#" class="btn btn-sm btn-primary" @click.prevent="toCategory('禮盒')">馬上選購一盒</a>
+              <a href="#" class="btn btn-lg btn-primary" @click.prevent="toCategory('禮盒')">馬上選購一盒</a>
             </p>
           </div>
         </div>

@@ -51,9 +51,9 @@
                   {{ num }} {{ productContent.unit }}
                 </option>
               </select>
-              <a href="shoppingCart-checkout.html" class="btn btn-primary">
+              <button type="button" class="btn btn-primary" @click.prevent="addtoCart(productContent.id)">
                 <i class="fa fa-cart-plus" aria-hidden="true"></i> 加入購物車
-              </a>
+              </button>
             </div>
             <div class="mt-2 text-right text-muted">
               <i class="fa fa-cc-visa" aria-hidden="true"></i>
@@ -92,6 +92,9 @@ export default {
   data() {
     return{
       id:'',
+      status:{
+        loadingItem: ''
+      },
       productContent:{
         num:1,
       },
@@ -109,7 +112,22 @@ export default {
         vm.$store.state.isLoading = false;
       })
       
-    }
+    },
+    addtoCart (id) {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
+      const vm = this
+      const cart = {
+        product_id: id,
+        qty: parseInt(vm.num)
+      }
+      vm.status.loadingItem = id
+      vm.$http.post(api, { data: cart }).then((response) => {
+        vm.status.loadingItem = ''
+        vm.getProductContent()
+        vm.$bus.$emit('message:push', response.data.message, 'success')
+        vm.$bus.$emit('cart-item', '修改購物車icon')
+      })
+    },
   },
   created() {
     this.id = this.$route.params.productId;;

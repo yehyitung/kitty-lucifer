@@ -118,6 +118,8 @@ export default {
         vm.$store.state.isLoading = false;
         console.log(response);
         vm.status.loadingItem = '';
+        vm.$bus.$emit('message:push', response.data.message, 'success')
+        vm.$bus.$emit('cart-item', '修改購物車icon')
         // vm.getCart();
         // $('#productModal').modal('hide');
       })

@@ -129,8 +129,8 @@ export default {
         },
         message: '',
       },
-      cart:{},
-      coupon_code: '',
+      cart:[],
+      coupon_code: {},
     };
   },
   methods: {
@@ -182,6 +182,18 @@ export default {
         vm.cart = response.data.data;
         console.log(response);
         vm.$store.state.isLoading = false;
+        if (vm.cart.total === 0) {
+          vm.$router.push('/')
+          vm.$bus.$emit('message:push', '該頁面目前禁止訪問', 'danger')
+        }
+
+        if (vm.cart.final_total !== vm.cart.total) {
+          vm.Coupon = vm.cart.carts[0].coupon
+          vm.couponShow = true
+        } else {
+          vm.Coupon = {}
+          vm.couponShow = false
+        }
       })
     },
     removeCartItem(id){

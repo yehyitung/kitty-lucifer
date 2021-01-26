@@ -117,6 +117,9 @@ export default {
   },
   created() {
     this.getCart();
+    this.$bus.$on('cart-item', (message) => {
+      this.getCart()
+    })
   },
 }
 </script>
