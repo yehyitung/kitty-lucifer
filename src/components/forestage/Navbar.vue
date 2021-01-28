@@ -33,11 +33,11 @@
             </li>
           </ul>
           <ul class="navbar-nav my-2 my-md-0">
-            <li class="nav-item mr-2">
+            <!-- <li class="nav-item mr-2">
               <a class="nav-link" href="#">
                 <i class="fas fa-heart"></i>
               </a>
-            </li>
+            </li> -->
             <li class="dropdown ml-auto nav-item mr-2">
               <button class="btn btn-sm btn-cart" data-toggle="dropdown" data-flip="false">
                 <i class="fa fa-shopping-cart nav-link" aria-hidden="true"></i>
@@ -66,11 +66,11 @@
                 </router-link>
               </div>
             </li>
-            <li class="nav-item mr-2">
+            <!-- <li class="nav-item mr-2">
               <router-link class="nav-link" to="/login">
                 <i class="fas fa-user-cog"></i>
               </router-link>
-            </li>
+            </li> -->
           </ul>
         </div>
       </div>
