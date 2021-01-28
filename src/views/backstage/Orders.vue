@@ -55,6 +55,7 @@ export default {
         console.log(response.data);
         vm.orders = response.data.orders;
         vm.pagination = response.data.pagination;
+        console.log(vm.pagination);
         vm.orders.forEach((item) => {
           if (item.paid_date) {
               const dates = new Date(item.paid_date * 1000);

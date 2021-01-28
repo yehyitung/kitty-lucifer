@@ -27,10 +27,10 @@
             <a href="#"><img src="../../assets/image/product-category-cup.jpg" alt="Image placeholder" class="img-fluid rounded"></a>
           </div>
           <div class="col-md-12 col-lg-5 text-center py-md-5">
-            <h2><a href="#">送禮最佳首選</a></h2>
-            <p>還在煩惱要送什麼東西給親朋好友嗎?我們有禮盒讓你選擇喔!</p>
+            <h2 class="pb-4"><a href="#">送禮最佳首選</a></h2>
+            <p class="pb-3 text-about">我們對獨特設計和協作的熱情將我們的願景和商品帶入了生活，為的就是使顧客在 Kitty Lucifer 能夠找到最合適的商品，並希望可以帶給顧客與眾不同的感受。</p>
             <p>
-              <a href="#" class="btn btn-lg btn-primary" @click.prevent="toCategory('禮盒')">馬上選購一盒</a>
+              <router-link href="#" class="btn btn-lg btn-primary" to="/all-products">馬上選購</router-link>
             </p>
           </div>
         </div>
@@ -48,7 +48,7 @@
           <div class="col-md-12">
              <carousel :margin="20" :loop="true" :nav="false" :autoplay="true" v-if="products && products.length" :responsive="{0:{items:1,nav:false},800:{items:2,nav:false},1000:{items:3,nav:false}}">
               <div class="item" v-for="(item, index) in products" :key="index">
-                <router-link :to="`/shopsitem/${item.id}`">
+                <router-link :to="`/all-products/${item.id}`">
                   <div class="block-4 text-center">
                     <figure class="block-4-image">
                         <img :src="item.imageUrl" alt="Image placeholder" class="img-fluid">
@@ -95,7 +95,7 @@ export default {
     toCategory (Name) {
       this.$router.push({
         name: 'AllProducts',
-        params: { categoryName: Name }
+        params: { categories: Name }
       })
     }
   },
@@ -116,6 +116,9 @@ export default {
   }
   .banner-title{
     margin-top: 100px;
+  }
+  .text-about{
+    font-size: 18px;
   }
 </style>
 
