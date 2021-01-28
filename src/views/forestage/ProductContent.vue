@@ -51,7 +51,7 @@
                   {{ num }} {{ productContent.unit }}
                 </option>
               </select>
-              <button type="button" class="btn btn-primary" @click.prevent="addtoCart(productContent.id)">
+              <button type="button" class="btn btn-primary" @click.prevent="addtoCart(productContent.id, productContent.num)">
                 <i class="fa fa-cart-plus" aria-hidden="true"></i> 加入購物車
               </button>
             </div>
@@ -113,12 +113,12 @@ export default {
       })
       
     },
-    addtoCart (id) {
+    addtoCart (id, qty = 1) {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
       const vm = this
       const cart = {
         product_id: id,
-        qty: parseInt(vm.num)
+        qty: parseInt(vm.productContent.num)
       }
       vm.status.loadingItem = id
       vm.$http.post(api, { data: cart }).then((response) => {
